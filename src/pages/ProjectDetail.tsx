@@ -25,10 +25,12 @@ const ProjectDetail = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div 
-        className="h-[50vh] bg-cover bg-center relative" 
-        style={{ backgroundImage: `url(${project.image})` }}
-      >
+      <div className="h-[50vh] bg-cover bg-center relative">
+        <img 
+          src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, '')}`}
+          alt={`${project.title} hero`} 
+          className="absolute inset-0 w-full h-full object-cover" 
+        />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <h1 className="text-white text-center max-w-4xl px-4">{project.title}</h1>
         </div>
@@ -103,14 +105,14 @@ const ProjectDetail = () => {
             <h2 className="mb-6">Project Images</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <img 
-                src={project.image} 
+                src={`${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, '')}`}
                 alt={`${project.title} screenshot 1`} 
                 className="w-full h-64 object-cover rounded-lg"
               />
               {project.extra_images.map((image, index) => (
                 <img 
                   key={index} 
-                  src={image} 
+                  src={`${import.meta.env.BASE_URL}${image.replace(/^\/+/, '')}`}
                   alt={`${project.title} screenshot ${index + 2}`} 
                   className="w-full h-64 object-cover rounded-lg"
                 />
