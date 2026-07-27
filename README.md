@@ -7,12 +7,12 @@ Live at **https://pr0fi7.github.io/markreate/**
 Vite + React + TypeScript + Tailwind CSS, deployed to GitHub Pages by GitHub
 Actions on every push to `main`.
 
-## One thing to add before the first deploy
+## Updating the CV
 
-`public/assets/Mark_Shevchenko_CV.pdf` is **missing** — drop your CV there under
-exactly that filename, otherwise the two "Download CV" buttons 404.
+The two "Download CV" buttons serve `public/assets/Mark_Shevchenko_CV.pdf`.
+Replace that file (keeping the filename) and push to publish a new version.
 
-If you would rather not publish a CV, delete the `Download CV` entry from
+If you would rather not publish a CV at all, delete the `Download CV` entry from
 `contactLinks` in `src/data/site.ts` and the second button in
 `src/components/sections/Hero.tsx`.
 
