@@ -1,75 +1,77 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 0%;
-
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 40%;
-
-    --accent: 0 0% 95%;
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 0% 0%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 0 0% 0%;
-
-    --radius: 0.5rem;
+    /*
+     * Design tokens as space-separated RGB channels rather than hex, so that
+     * Tailwind's opacity modifiers resolve (bg-paper/[0.82], text-paper/50, …).
+     * A bare `var(--x)` colour silently drops those utilities.
+     */
+    --brand: 198 90 53; /* #c65a35 */
+    --ink: 26 24 21; /* #1a1815 */
+    --ink-soft: 61 58 52; /* #3d3a34 */
+    --subtle: 107 102 94; /* #6b665e */
+    --paper: 250 249 246; /* #faf9f6 */
+    --line: 230 226 218; /* #e6e2da */
   }
 
-  * {
-    @apply border-border;
+  html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-paper text-ink font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+  ::selection {
+    @apply bg-brand text-white;
   }
 
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+  a:focus-visible,
+  button:focus-visible {
+    @apply rounded outline outline-2 outline-offset-[3px] outline-brand;
+  }
+}
+
+@layer components {
+  /* Page shell shared by every section: 1060px max, 20px / 24px gutters. */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 md:px-6;
+  }
+}
+
+/*
+ * Scroll reveal. The hidden state only applies once useReveal() has flagged the
+ * document, so the page stays fully visible if JS never runs.
+ */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  h2 {
-    @apply text-3xl md:text-4xl;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  .section-container {
-    @apply max-w-7xl mx-auto px-6 py-24 md:px-8;
-  }
-
-  .hover-underline {
-    @apply relative after:absolute after:w-full after:scale-x-0 
-           after:h-0.5 after:bottom-0 after:left-0 after:bg-primary 
-           after:origin-bottom-right after:transition-transform 
-           after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
   }
 }
