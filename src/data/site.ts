@@ -198,12 +198,6 @@ export const testimonials: Testimonial[] = [
     author: "Oleksandr Kuprii",
     role: "CTO, Harmix",
   },
-  {
-    quote:
-      "Mark combines real engineering depth with the rare ability to understand what a business actually needs. Every automation he touched ended up simpler, faster and more reliable.",
-    author: "Bohdan Yeremenko",
-    role: "Automation Lead, Etex",
-  },
 ];
 
 export const navLinks = [
